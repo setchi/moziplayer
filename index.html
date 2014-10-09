@@ -1,0 +1,46 @@
+<!DOCTYPE html> 
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="AA, アスキーアート, MoziPlayer, AA動画">
+	<meta name="description" content="ドラッグ＆ドロップされた動画ファイルや、インカメらの映像をテキストアートで再生します。">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:creator" content="@setchi_">
+	<!--<meta property="fb:app_id" content="">-->
+	<meta property="og:title" content="MoziPlayer">
+	<meta property="og:description" content="ドラッグ＆ドロップされた動画ファイルや、インカメらの映像をテキストアートで再生します。">
+	<meta property="og:url" content="http://setchi.jp/moziplayer/">
+	<meta property="og:image" content="http://setchi.jp/assets/img/icon/moziplayer.png">
+	<meta property="og:type" content="website">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="css/common.css" />
+	<link rel="shortcut icon" href="http://setchi.jp/moziplayer/img/icon/favicon.ico">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="js/video-source.js"></script>
+	<script src="js/aa-renderer.js"></script>
+	<script src="js/aa-canvas.js"></script>
+	<script src="js/aa-player.js"></script>
+	<script src="js/main.js"></script>
+
+</head>
+<body>
+	<div id="wrapper">
+		<video id="video" autoplay></video>
+		<canvas id="buffer" width="640" height="360"></canvas>
+		<div id="canvas"><div></div></div>
+		<div id="controller">
+			<div id="playButton"><span class="icon icon-pause"></span></div>
+			<input id="currentPosition" type="range" min="0" max="500" value="0">
+			<span class="icon icon-sound-on1" title="音量">
+				<span class="icon-sound-on2">
+				</span>
+			</span>
+			<input id="volume" title="音量" type="range" min="0" max="100" value="50">
+			<input id="resolution" title="画質" type="range" min="0" max="20" value="10">
+			<span id="fullScreen" title="全画面表示" class="icon icon-fullscreen"></span>
+		</div>
+	</div>
+</body>
+</html>
