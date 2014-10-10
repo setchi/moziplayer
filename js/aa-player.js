@@ -2,89 +2,24 @@
  * AA描画の操作
  */
 
-var AAPlayer = function (AACanvas, VideoSource, AARenderer) {
-	this._AACanvas = AACanvas;
-	this._AARenderer = AARenderer;
-	this._VideoSource = VideoSource;
-	this._animationFrame = null,
-	this._playing = false;
-	this._context = document.getElementById("buffer").getContext("2d");
-	this._$currentPosition = $('#currentPosition');
+var AAPlayer = function (aaCanvas, videoSource, aaRenderer) {
+	var module = {},
+		animationFrame = null,
+		playing = false,
+		context = document.getElementById("buffer").getContext("2d"),
+		$currentPosition = $('#currentPosition');
 
-	var _self = this;
-	this._VideoSource.addEventListeners({
-		timeupdate: function () {
-			if (_self._VideoSource.source.paused) return;
-			_self._$currentPosition.val(_self._VideoSource.getPosition() * 500);
-		},
-
-		canplaythrough: function () {
-			_self._AACanvas.adjustScale(_self._VideoSource.source);
-		}
-	});
-
-	this._init();
-}
-AAPlayer.prototype = {
-	_init: function () {
-		var _self = this;
-
-		// インカメラのストリームを取得
-		this._VideoSource.getUserVideoMedia(function (stream) {
-			_self.play(stream);
-
-		}, function (e) {
-			// alert("Not supported.");
-			_self.play("drop.mp4");
-		});
-
-		this.setVolume($('#volume').val());
-	},
-
-	play: function (stream) {
-		if (stream) {
-			this._VideoSource.setStream(stream);
-		}
-
-		if (this._playing) return;
-		this._playing = true;
-		this._VideoSource.play();
-
-		if (this._animationFrame === null) {
-			this._renderAAByCanvasImage();
-		}
-	},
-
-	pause: function () {
-		if (!this._playing) return;
-		this._playing = false;
-		this._VideoSource.pause();
-	},
-
-	isPlaying: function () {
-		return this._playing;
-	},
-
-	setPosition: function (value) {
-		this._VideoSource.setPosition(+value / 500);
-	},
-
-	setVolume: function (volume) {
-		this._VideoSource.setVolume(+volume / 100);
-	},
-
-	_renderAAByCanvasImage: function () {
-		var imageWidth = this._AACanvas.cfw | 0;
-		var imageHeight = (imageWidth / this._AACanvas.WPH | 0) || 1;
-		var _self = this;
-
+	function renderAAByCanvasImage () {
+		var imageWidth = aaCanvas.cfw | 0;
+		var imageHeight = (imageWidth / aaCanvas.WPH | 0) || 1;
+		
 		try {
-			this._context.drawImage(this._VideoSource.source, 0, 0, imageWidth, imageHeight);
+			context.drawImage(videoSource.source, 0, 0, imageWidth, imageHeight);
 
 		} catch (e) {
 			if (e.name === "NS_ERROR_NOT_AVAILABLE") {
 				setTimeout(function () {
-					_self._renderAAByCanvasImage();
+					renderAAByCanvasImage();
 				}, 100);
 
 				console.warn(e);
@@ -93,14 +28,71 @@ AAPlayer.prototype = {
 			}
 		}
 
-		this._AACanvas.draw(this._AARenderer.render(
-			this._context.getImageData(0, 0, imageWidth, imageHeight),
-			this._AACanvas.cfw,
-			this._AACanvas.cfh
+		aaCanvas.draw(aaRenderer.render(
+			context.getImageData(0, 0, imageWidth, imageHeight),
+			aaCanvas.cfw,
+			aaCanvas.cfh
 		));
 
-		this._animationFrame = window.requestAnimationFrame(function () {
-			_self._renderAAByCanvasImage();
+		animationFrame = window.requestAnimationFrame(function () {
+			renderAAByCanvasImage();
 		});
 	}
+
+	module.play = function (stream) {
+		if (stream) {
+			videoSource.setStream(stream);
+		}
+
+		if (playing) return;
+		playing = true;
+		videoSource.play();
+
+		if (animationFrame === null) {
+			renderAAByCanvasImage();
+		}
+	},
+
+	module.pause = function () {
+		if (!playing) return;
+		playing = false;
+		videoSource.pause();
+	},
+
+	module.isPlaying = function () {
+		return playing;
+	},
+
+	module.setPosition = function (value) {
+		videoSource.setPosition(+value / 500);
+	},
+
+	module.setVolume = function (volume) {
+		videoSource.setVolume(+volume / 100);
+	}
+
+	// init
+	videoSource.addEventListeners({
+		timeupdate: function () {
+			if (videoSource.source.paused) return;
+			$currentPosition.val(videoSource.getPosition() * 500);
+		},
+
+		canplaythrough: function () {
+			aaCanvas.adjustScale(videoSource.source);
+		}
+	});
+
+	// インカメラのストリームを取得
+	videoSource.getUserVideoMedia(function (stream) {
+		module.play(stream);
+
+	}, function (e) {
+		// alert("Not supported.");
+		module.play("drop.mp4");
+	});
+
+	module.setVolume($('#volume').val());
+
+	return module;
 }
