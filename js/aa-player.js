@@ -14,7 +14,7 @@ var AAPlayer = function (aaCanvas, videoSource, aaRenderer) {
 		var imageHeight = (imageWidth / aaCanvas.WPH | 0) || 1;
 		
 		try {
-			context.drawImage(videoSource.source, 0, 0, imageWidth, imageHeight);
+			context.drawImage(videoSource.getSource(), 0, 0, imageWidth, imageHeight);
 
 		} catch (e) {
 			if (e.name === "NS_ERROR_NOT_AVAILABLE") {
@@ -74,12 +74,12 @@ var AAPlayer = function (aaCanvas, videoSource, aaRenderer) {
 	// init
 	videoSource.addEventListeners({
 		timeupdate: function () {
-			if (videoSource.source.paused) return;
+			if (videoSource.getSource().paused) return;
 			$currentPosition.val(videoSource.getPosition() * 500);
 		},
 
 		canplaythrough: function () {
-			aaCanvas.adjustScale(videoSource.source);
+			aaCanvas.adjustScale(videoSource.getSource());
 		}
 	});
 

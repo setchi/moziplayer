@@ -18,7 +18,7 @@ $(function () {
 	.bind("dragover", cancelEvent)
 	.bind("drop", function (e) {
 		player.play(window.URL.createObjectURL(e.originalEvent.dataTransfer.files[0]));
-		canvas.adjustScale(videoSource.source);
+		canvas.adjustScale(videoSource.getSource());
 		return cancelEvent(e);
 	});
 
@@ -86,7 +86,7 @@ $(function () {
 		});
 
 		$('#resolution').change(function () {
-			canvas.applyScale(videoSource.source, $(this).val());
+			canvas.applyScale(videoSource.getSource(), $(this).val());
 
 		}).mousedown(function () {
 			isMousedown = true;
@@ -96,7 +96,7 @@ $(function () {
 
 		}).mousemove(function () {
 			if (isMousedown) {
-				canvas.applyScale(videoSource.source, $(this).val());
+				canvas.applyScale(videoSource.getSource(), $(this).val());
 			}
 		});
 

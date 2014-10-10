@@ -3,49 +3,52 @@
  */
 
 var VideoSource = function (source) {
-	this.source = source;
-}
-VideoSource.prototype = {
- 	addEventListeners: function (listeners) {
+	var module = {};
+
+ 	module.addEventListeners = function (listeners) {
  		for (var eventName in listeners) if (listeners.hasOwnProperty(eventName)) {
- 			this.source.addEventListener(eventName, listeners[eventName]);
+ 			source.addEventListener(eventName, listeners[eventName]);
  		}
- 	},
+ 	}
 
- 	play: function () {
- 		if (this.source.paused) {
- 			this.source.play();
+ 	module.play = function () {
+ 		if (source.paused) {
+ 			source.play();
  		}
- 	},
+ 	}
 
- 	pause: function () {
- 		if (!this.source.paused) {
- 			this.source.pause();
+ 	module.pause = function () {
+ 		if (!source.paused) {
+ 			source.pause();
  		}
- 	},
+ 	}
 
- 	setVolume: function (volume) {
-		this.source.volume = volume;
-	},
+ 	module.setVolume = function (volume) {
+		source.volume = volume;
+	}
 
-	setStream: function (stream) {
-		this.source.src = stream;
-	},
+	module.setStream = function (stream) {
+		source.src = stream;
+	}
 
-	setPosition: function (value) {
+	module.setPosition = function (value) {
 		try {
-			this.source.currentTime = this.source.duration * value;
+			source.currentTime = source.duration * value;
 
 		} catch (e) {
 			console.warn(e);
 		}
-	},
+	}
 
-	getPosition: function () {
-		return this.source.currentTime / this.source.duration;
-	},
+	module.getPosition = function () {
+		return source.currentTime / source.duration;
+	}
 
- 	getUserVideoMedia: function (onSuccess, onError) {
+	module.getSource = function () {
+		return source;
+	}
+
+ 	module.getUserVideoMedia = function (onSuccess, onError) {
 		navigator.getUserMedia = navigator.getUserMedia ||
 			navigator.webkitGetUserMedia ||
 			navigator.mozGetUserMedia ||
@@ -65,5 +68,7 @@ VideoSource.prototype = {
 		}, function (e) {
 			onError(e)
 		});
- 	},
+ 	}
+
+ 	return module;
 }
