@@ -29,17 +29,16 @@ var AACanvas = function (canvas) {
 			left: -(width >> 1) + 'px'
 		});
 		module.resize();
-	},
+	};
 
 	module.applyScale = function (video, rate) {
 		scale = calcScale(rate);
 		module.adjustScale(video);
-	},
+	};
 
 	module.draw = function (text) {
-		console.log('draw')
 		canvas[innerText] = text;
-	},
+	};
 
 	module.resize = function () {
 		var width = parseInt($(canvas).width());
@@ -55,7 +54,7 @@ var AACanvas = function (canvas) {
 			'transform': 'scale(' + scale + ', ' + scale + ')',
 			'top': (height - height * scale) / -2 + 'px'
 		});
-	}
+	};
 
 	return module;
 }

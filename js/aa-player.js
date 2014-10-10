@@ -51,25 +51,25 @@ var AAPlayer = function (aaCanvas, videoSource, aaRenderer) {
 		if (animationFrame === null) {
 			renderAAByCanvasImage();
 		}
-	},
+	};
 
 	module.pause = function () {
 		if (!playing) return;
 		playing = false;
 		videoSource.pause();
-	},
+	};
 
 	module.isPlaying = function () {
 		return playing;
-	},
+	};
 
 	module.setPosition = function (value) {
 		videoSource.setPosition(+value / 500);
-	},
+	};
 
 	module.setVolume = function (volume) {
 		videoSource.setVolume(+volume / 100);
-	}
+	};
 
 	// init
 	videoSource.addEventListeners({

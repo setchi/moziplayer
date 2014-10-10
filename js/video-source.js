@@ -9,27 +9,27 @@ var VideoSource = function (source) {
  		for (var eventName in listeners) if (listeners.hasOwnProperty(eventName)) {
  			source.addEventListener(eventName, listeners[eventName]);
  		}
- 	}
+ 	};
 
  	module.play = function () {
  		if (source.paused) {
  			source.play();
  		}
- 	}
+ 	};
 
  	module.pause = function () {
  		if (!source.paused) {
  			source.pause();
  		}
- 	}
+ 	};
 
  	module.setVolume = function (volume) {
 		source.volume = volume;
-	}
+	};
 
 	module.setStream = function (stream) {
 		source.src = stream;
-	}
+	};
 
 	module.setPosition = function (value) {
 		try {
@@ -38,15 +38,15 @@ var VideoSource = function (source) {
 		} catch (e) {
 			console.warn(e);
 		}
-	}
+	};
 
 	module.getPosition = function () {
 		return source.currentTime / source.duration;
-	}
+	};
 
 	module.getSource = function () {
 		return source;
-	}
+	};
 
  	module.getUserVideoMedia = function (onSuccess, onError) {
 		navigator.getUserMedia = navigator.getUserMedia ||
@@ -68,7 +68,7 @@ var VideoSource = function (source) {
 		}, function (e) {
 			onError(e)
 		});
- 	}
+ 	};
 
  	return module;
 }
