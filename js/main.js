@@ -1,10 +1,10 @@
 $(function () {
-	var canvas = new AACanvas(document.getElementById('canvas'));
-	var videoSource = new VideoSource(document.getElementById("video"));
-	var player = new AAPlayer(
+	var canvas = AACanvas(document.getElementById('canvas'));
+	var videoSource = VideoSource(document.getElementById("video"));
+	var player = AAPlayer(
 		canvas,
 		videoSource,
-		new AARenderer()
+		AARenderer()
 	);
 
 	function cancelEvent(e) {
