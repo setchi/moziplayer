@@ -5,10 +5,8 @@
 var VideoSource = function (source) {
 	var module = {};
 
- 	module.addEventListeners = function (listeners) {
- 		for (var eventName in listeners) if (listeners.hasOwnProperty(eventName)) {
- 			source.addEventListener(eventName, listeners[eventName]);
- 		}
+ 	module.on = function (eventName, eventCallback) {
+ 		source.addEventListener(eventName, eventCallback);
  	};
 
  	module.play = function () {

@@ -15,13 +15,11 @@ var AAPlayer = function (aaCanvas, videoSource, aaRenderer) {
 		
 		try {
 			context.drawImage(videoSource.getSource(), 0, 0, imageWidth, imageHeight);
-
 		} catch (e) {
 			if (e.name === "NS_ERROR_NOT_AVAILABLE") {
 				setTimeout(function () {
 					renderAAByCanvasImage();
 				}, 100);
-
 				console.warn(e);
 			} else {
 				throw e;
@@ -34,9 +32,7 @@ var AAPlayer = function (aaCanvas, videoSource, aaRenderer) {
 			aaCanvas.cfh
 		));
 
-		animationFrame = window.requestAnimationFrame(function () {
-			renderAAByCanvasImage();
-		});
+		animationFrame = window.requestAnimationFrame(renderAAByCanvasImage);
 	}
 
 	module.play = function (stream) {
@@ -72,15 +68,13 @@ var AAPlayer = function (aaCanvas, videoSource, aaRenderer) {
 	};
 
 	// init
-	videoSource.addEventListeners({
-		timeupdate: function () {
-			if (videoSource.getSource().paused) return;
-			$currentPosition.val(videoSource.getPosition() * 500);
-		},
-
-		canplaythrough: function () {
-			aaCanvas.adjustScale(videoSource.getSource());
-		}
+	videoSource.on('timeupdate', function () {
+		if (videoSource.getSource().paused) return;
+		$currentPosition.val(videoSource.getPosition() * 500);
+	});
+	
+	videoSource.on('canplaythrough', function () {
+		aaCanvas.adjustScale(videoSource.getSource());
 	});
 
 	// インカメラのストリームを取得
