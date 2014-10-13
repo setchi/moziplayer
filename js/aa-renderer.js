@@ -1,7 +1,6 @@
 /**
- * 解像度を指定して、CanvasのImageDataからAAを生成する
+ * 縦横の文字数とCanvasのImageDataからAAを生成する
  */
-
 var AARenderer = function () {
 	var charTable = new ArrayBuffer(256 * 256);
 	var rParam = 0.298912;
@@ -149,7 +148,15 @@ var AARenderer = function () {
 	}(charTable))
 
 	return {
-		
+
+
+		/**
+		 * AAを生成
+		 * @param  {ImageData} img
+		 * @param  {Number} cfw AAの横の文字数
+		 * @param  {Nunber} cfh AAの縦の文字数
+		 * @return {String} 生成したAA
+		 */
 		render: function (img, cfw, cfh) {
 			cfw |= 0;
 			cfh |= 0;

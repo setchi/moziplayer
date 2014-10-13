@@ -1,22 +1,48 @@
-/*
+/**
  * AA描画領域に関する処理
+ * @param {HTMLElement} canvas
  */
-
 var AACanvas = function (canvas) {
 	var module = {},
 		scale = 1.25,
 		innerText = canvas.innerText ? "innerText" : "textContent";
 
-	function calcScale (per) {
-		return 0.5 + (per / 10);
+	/**
+	 * InputValueの値をScale用に加工
+	 * @param  {Number} rate
+	 */
+	function calcScale (rate) {
+		return 0.5 + (rate / 10);
 	}
 
+
+	/**
+	 * AAの横の文字数
+	 * @type {Number}
+	 */
 	module.cfw = 1;
+
+
+	/**
+	 * AAの縦の文字数
+	 * @type {Number}
+	 */
 	module.cfh = 1;
+
+
+	/**
+	 * アスペクト比
+	 * @type {Number}
+	 */
 	module.WPH = 1.7;
 
-	module.adjustScale = function (video) {
-		module.WPH = video.videoWidth / video.videoHeight;
+
+	/**
+	 * メディアの解像度を元にCanvasの位置・大きさを調整
+	 * @param  {HTMLVideoElement} source
+	 */
+	module.adjustScale = function (source) {
+		module.WPH = source.videoWidth / source.videoHeight;
 
 		var width  = 1600 * scale;
 		var height = (width / module.WPH | 0) || 1;
@@ -31,15 +57,31 @@ var AACanvas = function (canvas) {
 		module.resize();
 	};
 
-	module.applyScale = function (video, rate) {
+
+	/**
+	 * 指定された解像度を適用する
+	 * @param  {HTMLVideoElement} source
+	 * @param  {Number} rate
+	 */
+	module.applyScale = function (source, rate) {
 		scale = calcScale(rate);
-		module.adjustScale(video);
+		module.adjustScale(source);
 	};
 
+
+	/**
+	 * AAを描画
+	 * @param  {String} text
+	 */
 	module.draw = function (text) {
 		canvas[innerText] = text;
 	};
 
+
+	/**
+	 * Canvasが画面いっぱいになるようScaleを調整する
+	 * @return {[type]}
+	 */
 	module.resize = function () {
 		var width = parseInt($(canvas).width());
 		var height = parseInt($(canvas).height());

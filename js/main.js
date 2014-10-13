@@ -1,27 +1,17 @@
 $(function () {
-	var canvas = AACanvas(document.getElementById('canvas'));
-	var videoSource = VideoSource(document.getElementById("video"));
-	var player = AAPlayer(
-		canvas,
-		videoSource,
-		AARenderer()
-	);
-
 	function cancelEvent(e) {
 		e.preventDefault();
 		e.stopPropagation();
 		return false;
 	}
 
-	// 動画ドロップ
-	$(document).bind("dragenter", cancelEvent)
-	.bind("dragover", cancelEvent)
-	.bind("drop", function (e) {
-		player.play(window.URL.createObjectURL(e.originalEvent.dataTransfer.files[0]));
-		canvas.adjustScale(videoSource.getSource());
-		return cancelEvent(e);
-	});
 
+	var canvas = AACanvas(document.getElementById('canvas'));
+	var videoSource = VideoSource(document.getElementById("video"));
+	var player = AAPlayer(canvas, videoSource, AARenderer());
+
+
+	// 再生/停止 切り替え
 	$('#playButton').mousedown(function (e) {
 		if (player.isPlaying()) {
 			player.pause();
@@ -35,9 +25,9 @@ $(function () {
 		return cancelEvent(e);
 	});
 
+
 	// 全画面表示
 	$('#fullScreen').click(function () {
-		console.log('fullcanvas');
 		var target = document.getElementsByTagName('html')[0];
 
 		if (target.webkitRequestFullScreen) {
@@ -45,14 +35,22 @@ $(function () {
 
 		} else if (target.mozRequestFullScreen) {
 			target.mozRequestFullScreen();
-
 		}
 	});
 
-	// シークバー操作
+
+	// 動画ファイルドロップ
+	$(document).bind("drop", function (e) {
+		player.play(window.URL.createObjectURL(e.originalEvent.dataTransfer.files[0]));
+		canvas.adjustScale(videoSource.getSource());
+		return cancelEvent(e);
+
+	}).bind("dragover", cancelEvent).bind("dragenter", cancelEvent);
+
+
 	(function () {
 		var isMousedown = false;
-
+		// 再生位置の操作
 		$('#currentPosition').change(function () {
 			player.setPosition($(this).val());
 
@@ -70,6 +68,8 @@ $(function () {
 			}
 		});
 
+
+		// 音量の操作
 		$('#volume').change(function () {
 			player.setVolume($(this).val());
 
@@ -85,6 +85,8 @@ $(function () {
 			}
 		});
 
+
+		// AA解像度の操作
 		$('#resolution').change(function () {
 			canvas.applyScale(videoSource.getSource(), $(this).val());
 
@@ -100,6 +102,8 @@ $(function () {
 			}
 		});
 
+
+		// マウスオーバー or 操作中以外はコントローラを非表示
 		var $controller = $('#controller');
 		var controllerHiddenRequest = false;
 
@@ -116,14 +120,15 @@ $(function () {
 			}
 		});
 
-		// リサイズ
+
+		// 画面リサイズ
 		$(window).resize(function () {
 			var timer = null;
 
 			function screenResize() {
 				canvas.resize();
 
-				// Controller resize.
+				// コントローラのScale調整
 				var baseWidth = parseInt($controller.width());
 				var baseHeight = parseInt($controller.height());
 				var headerHeight = 0;
@@ -146,5 +151,4 @@ $(function () {
 			}
 		}()).resize();
 	}());
-
 });
