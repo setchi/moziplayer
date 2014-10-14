@@ -39,10 +39,11 @@ var AACanvas = function (canvas) {
 
 	/**
 	 * メディアの解像度を元にCanvasの位置・大きさを調整
-	 * @param  {HTMLVideoElement} source
+	 * @param  {Number} videoWidth
+	 * @param  {Number} videoHeight
 	 */
-	module.adjustScale = function (source) {
-		module.WPH = source.videoWidth / source.videoHeight;
+	module.adjustScale = function (videoWidth, videoHeight) {
+		module.WPH = videoWidth / videoHeight;
 
 		var width  = 1600 * scale;
 		var height = (width / module.WPH | 0) || 1;
@@ -60,12 +61,13 @@ var AACanvas = function (canvas) {
 
 	/**
 	 * 指定された解像度を適用する
-	 * @param  {HTMLVideoElement} source
+	 * @param  {Number} videoWidth
+	 * @param  {Number} videoHeight
 	 * @param  {Number} rate
 	 */
-	module.applyScale = function (source, rate) {
+	module.applyScale = function (videoWidth, videoHeight, rate) {
 		scale = calcScale(rate);
-		module.adjustScale(source);
+		module.adjustScale(videoWidth, videoHeight);
 	};
 
 
@@ -80,7 +82,6 @@ var AACanvas = function (canvas) {
 
 	/**
 	 * Canvasが画面いっぱいになるようScaleを調整する
-	 * @return {[type]}
 	 */
 	module.resize = function () {
 		var width = parseInt($(canvas).width());

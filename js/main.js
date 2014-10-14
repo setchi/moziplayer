@@ -6,8 +6,8 @@ $(function () {
 	}
 
 
-	var canvas = AACanvas(document.getElementById('canvas'));
 	var videoSource = VideoSource(document.getElementById("video"));
+	var canvas = AACanvas(document.getElementById('canvas'));
 	var player = AAPlayer(canvas, videoSource, AARenderer());
 
 
@@ -42,7 +42,8 @@ $(function () {
 	// 動画ファイルドロップ
 	$(document).bind("drop", function (e) {
 		player.play(window.URL.createObjectURL(e.originalEvent.dataTransfer.files[0]));
-		canvas.adjustScale(videoSource.getSource());
+		var source = videoSource.getSource();
+		canvas.adjustScale(source.videoWidth, source.videoHeight);
 		return cancelEvent(e);
 
 	}).bind("dragover", cancelEvent).bind("dragenter", cancelEvent);
@@ -88,7 +89,8 @@ $(function () {
 
 		// AA解像度の操作
 		$('#resolution').change(function () {
-			canvas.applyScale(videoSource.getSource(), $(this).val());
+			var source = videoSource.getSource();
+			canvas.applyScale(source.videoWidth, source.videoHeight, $(this).val());
 
 		}).mousedown(function () {
 			isMousedown = true;
@@ -98,7 +100,8 @@ $(function () {
 
 		}).mousemove(function () {
 			if (isMousedown) {
-				canvas.applyScale(videoSource.getSource(), $(this).val());
+				var source = videoSource.getSource();
+				canvas.applyScale(source.videoWidth, source.videoHeight, $(this).val());
 			}
 		});
 

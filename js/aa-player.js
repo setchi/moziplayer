@@ -105,7 +105,8 @@ var AAPlayer = function (aaCanvas, videoSource, aaRenderer) {
 	});
 	
 	videoSource.on('canplaythrough', function () {
-		aaCanvas.adjustScale(videoSource.getSource());
+		var source = videoSource.getSource();
+		aaCanvas.adjustScale(source.videoWidth, source.videoHeight);
 	});
 
 	// インカメラの映像再生を試みる
