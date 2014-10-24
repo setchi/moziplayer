@@ -27,6 +27,7 @@ var AAPlayer = function (aaCanvas, videoSource, aaRenderer) {
 					renderAAByCanvasImage();
 				}, 100);
 				console.warn(e);
+				return;
 			} else {
 				throw e;
 			}
