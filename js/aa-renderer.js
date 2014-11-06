@@ -1,7 +1,10 @@
+define(function () {
+"use strict";
+
 /**
  * 縦横の文字数とCanvasのImageDataからAAを生成する
  */
-var AARenderer = function () {
+return function () {
 	var charTable = new ArrayBuffer(256 * 256);
 	var rParam = 0.298912;
 	var gParam = 0.586611;
@@ -194,3 +197,5 @@ var AARenderer = function () {
 		}
 	}
 }
+
+});

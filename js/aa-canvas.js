@@ -1,8 +1,11 @@
+define(['jquery'], function ($) {
+"use strict";
+
 /**
  * AA描画領域に関する処理
  * @param {HTMLElement} canvas
  */
-var AACanvas = function (canvas) {
+return function (canvas) {
 	var module = {},
 		scale = 1.25,
 		innerText = canvas.innerText ? "innerText" : "textContent";
@@ -101,3 +104,5 @@ var AACanvas = function (canvas) {
 
 	return module;
 }
+
+});

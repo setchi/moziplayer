@@ -1,4 +1,15 @@
-$(function () {
+require.config({
+	baseUrl: 'js/',
+	paths: {
+		'jquery': 'lib/jquery-2.1.1.min'
+	}
+});
+
+
+require(['jquery', 'aa-canvas', 'aa-player', 'aa-renderer', 'video-source'],
+	function ($, AACanvas, AAPlayer, AARenderer, VideoSource) {
+	"use strict";
+
 	function cancelEvent(e) {
 		e.preventDefault();
 		e.stopPropagation();

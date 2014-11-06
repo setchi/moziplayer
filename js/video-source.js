@@ -1,8 +1,11 @@
+define(function () {
+"use strict";
+
 /**
  * HTML5 Video要素のラッパー
  * @param {HTMLVideoElement} source
  */
-var VideoSource = function (source) {
+return function (source) {
 	var module = {};
 
 
@@ -115,3 +118,5 @@ var VideoSource = function (source) {
 
  	return module;
 }
+
+});

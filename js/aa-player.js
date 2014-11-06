@@ -1,10 +1,13 @@
+define(['jquery'], function ($) {
+"use strict";
+
 /**
  * AA描画に関する操作
  * @param {AACanvas} aaCanvas
  * @param {VideoSource} videoSource
  * @param {AARenderer} aaRenderer
  */
-var AAPlayer = function (aaCanvas, videoSource, aaRenderer) {
+return function (aaCanvas, videoSource, aaRenderer) {
 	var module = {},
 		animationFrame = null,
 		playing = false,
@@ -123,3 +126,5 @@ var AAPlayer = function (aaCanvas, videoSource, aaRenderer) {
 
 	return module;
 }
+
+});
