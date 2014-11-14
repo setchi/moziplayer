@@ -5,7 +5,7 @@ moziplayer
 
 [http://setchi.jp/moziplayer/](http://setchi.jp/moziplayer/)
 
-![MoziPlayer](http://setchi.jp/moziplayer/img/moziplayer.png "MoziPlayer")
+![MoziPlayer](img/moziplayer.png "MoziPlayer")
 
 できること
 --------------------
