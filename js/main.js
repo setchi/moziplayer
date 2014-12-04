@@ -150,11 +150,12 @@ require(['jquery', 'aa-canvas', 'aa-player', 'aa-renderer', 'video-source'],
 					$(window).width() * 0.6 / baseWidth, 
 					($(window).height() * 0.6 - headerHeight) / baseHeight
 				);
+				var scaleText = 'scale(' + scale + ', ' + scale + ')';
 				var bottom = (baseHeight - baseHeight * scale) / -2 + headerHeight + scale * 10;
 
 				$controller.css({
-					'-webkit-transform': 'scale(' + scale + ', ' + scale + ')',
-					'transform': 'scale(' + scale + ', ' + scale + ')',
+					'-webkit-transform': scaleText,
+					'transform': scaleText,
 					'bottom': bottom + 'px'
 				});
 			}

@@ -94,10 +94,11 @@ return function (canvas) {
 			$(window).width() * 0.97 / width, 
 			($(window).height() * 0.97) / height
 		);
+		var scaleText = 'scale(' + scale + ', ' + scale + ')';
 
 		$(canvas).css({
-			'-webkit-transform': 'scale(' + scale + ', ' + scale + ')',
-			'transform': 'scale(' + scale + ', ' + scale + ')',
+			'-webkit-transform': scaleText,
+			'transform': scaleText,
 			'top': (height - height * scale) / -2 + 'px'
 		});
 	};
