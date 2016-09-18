@@ -2,7 +2,7 @@
 
 ドラッグ＆ドロップされた動画ファイルや、インカメラの映像をテキストアートで再生します。
 
-[http://setchi.jp/moziplayer/](http://setchi.jp/moziplayer/)
+[https://setchi.github.io/moziplayer/](https://setchi.github.io/moziplayer/)
 
 ![MoziPlayer](img/moziplayer.png "MoziPlayer")
 
