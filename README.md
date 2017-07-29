@@ -2,9 +2,9 @@
 
 ドラッグ＆ドロップされた動画ファイルや、インカメラの映像をテキストアートで再生します。[English](https://translate.google.com/translate?sl=ja&tl=en&u=https://github.com/setchi/moziplayer) (by Google Translate)
 
-[https://setchi.github.io/moziplayer/](https://setchi.github.io/moziplayer/)
-
 ![MoziPlayer](img/moziplayer.png "MoziPlayer")
+
+[https://setchi.github.io/moziplayer/](https://setchi.github.io/moziplayer/)
 
 ## できること
 - インカメラの映像をAA再生(アクセス時に許可した場合)
