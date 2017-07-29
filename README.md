@@ -1,6 +1,6 @@
 # moziplayer
 
-ドラッグ＆ドロップされた動画ファイルや、インカメラの映像をテキストアートで再生します。
+ドラッグ＆ドロップされた動画ファイルや、インカメラの映像をテキストアートで再生します。[English](https://translate.google.com/translate?sl=ja&tl=en&u=https://github.com/setchi/moziplayer) (by Google Translate)
 
 [https://setchi.github.io/moziplayer/](https://setchi.github.io/moziplayer/)
 
