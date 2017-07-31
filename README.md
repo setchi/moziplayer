@@ -4,7 +4,7 @@
 
 ![MoziPlayer](img/moziplayer.png "MoziPlayer")
 
-[https://setchi.github.io/moziplayer/](https://setchi.github.io/moziplayer/)
+[https://setchi.jp/moziplayer/](https://setchi.jp/moziplayer/)
 
 ## できること
 - インカメラの映像をAA再生(アクセス時に許可した場合)
