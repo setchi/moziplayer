@@ -1,4 +1,4 @@
-# moziplayer
+# moziplayer [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](http://mit-license.org)
 
 ドラッグ＆ドロップされた動画ファイルや、インカメラの映像をテキストアートで再生します。[English](https://translate.google.com/translate?sl=ja&tl=en&u=https://github.com/setchi/moziplayer) (by Google Translate)
 
