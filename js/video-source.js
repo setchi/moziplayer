@@ -53,7 +53,7 @@ return function (source) {
 	 * @param {Object} 動画URIの文字列 | createObjectURLの戻り値
 	 */
 	module.setStream = function (stream) {
-		source.src = stream;
+		source.srcObject = stream;
 	};
 
 
@@ -95,23 +95,14 @@ return function (source) {
 	 * @param  {Function} onError
 	 */
  	module.getUserVideoMedia = function (onSuccess, onError) {
-		navigator.getUserMedia = navigator.getUserMedia ||
-			navigator.webkitGetUserMedia ||
-			navigator.mozGetUserMedia ||
-			navigator.msGetUserMedia;
 
-		if (!window.URL || !navigator.getUserMedia) {
-			alert("Not supported.");
-			return;
-		}
-
-		navigator.getUserMedia({
+		navigator.mediaDevices.getUserMedia({
 			video: true
 
-		}, function (stream) {
-			onSuccess(window.URL.createObjectURL(stream))
+		}).then(function (stream) {
+			onSuccess(stream)
 		
-		}, function (e) {
+		}).catch(function (e) {
 			onError(e)
 		});
  	};
